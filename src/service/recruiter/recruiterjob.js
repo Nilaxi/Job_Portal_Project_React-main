@@ -302,5 +302,10 @@ export const EndJobUpdate = (data) => {
 export const ApplicationJobData = (data) => {
     return authFetchGet(`/api/applications`,'GET',data)}
 
+    // Job Apply
 
+export const ApplyJobApplicantData = (data) => {
+
+        return authFetch(`/api/jobs/${data.id}/applications`,'Post', data)
+    }
 export default createJob;

@@ -18,6 +18,7 @@ import { getJobRequest, searchgetJobRequest, searchgetJobRequestAdvanced } from 
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import DialogContent from '@mui/material/DialogContent';
+import { GetApplyDataRequest } from 'slice/applicant/profileUpdateSlice';
 
 
 
@@ -407,13 +408,29 @@ export const ListJobApplicant = () => {
 
 
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
+  const [id, setId] = React.useState(false);
+  const handleClickOpen = (id) => {
     setOpen(true);
+    setId(id)
   };
   const handleClose = () => {
     setOpen(false);
+
   };
+  const [jobdetails,setJobdetails] = useState('')
+   const handleInput = (key,value) =>{
+    setJobdetails({
+      [key]: value,
+    });
+  }
+  const handleSubmitApply = (e) =>{
+      e.preventDefault()
+      dis(GetApplyDataRequest({
+        id : id,
+        ...jobdetails
+      }))
+      handleClose()
+  }
 
    // search job ----------------------->
 
@@ -573,7 +590,7 @@ const [searchOptions, setSearchOptions] = useState({
                         
                         }}
                         size="small"
-                        onClick={handleClickOpen}
+                          onClick={()=>{handleClickOpen(v._id)}}
                       >
                         APPLY
                       </Button>
@@ -615,11 +632,14 @@ const [searchOptions, setSearchOptions] = useState({
           fullWidth
           multiline
           rows={9}
+          onChange={(e) =>
+            handleInput ("SOP",e.target.value)
+          }
         />
     </Box>
         </DialogContent>
         <DialogActions style={{justifyContent:"center", padding:"17px 0px 17px 0px"}}>
-          <Button style={{backgroundColor:"#1976d2",color:"white",padding:"8px 18px"}} >SUBMIT</Button>
+          <Button onClick={handleSubmitApply}     style={{backgroundColor:"#1976d2",color:"white",padding:"8px 18px"}} >SUBMIT</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

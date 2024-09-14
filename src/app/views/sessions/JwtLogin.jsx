@@ -72,7 +72,7 @@ const JwtLogin = () => {
             toast.success("Login Successfull")
           localStorage.setItem('token', JSON.stringify(y));
          
-          div('/');
+          div('/dashboard/default');
           }
           else{
             toast.error("Email and Password is Invalid!")
@@ -175,6 +175,15 @@ const JwtLogin = () => {
                         style={{ color: theme.palette.primary.main, marginLeft: 5 }}
                       >
                         Register
+                      </NavLink>
+                    </Paragraph>
+                    <Paragraph>
+                      Don't have an account?
+                      <NavLink
+                        to="/session/signinForApplicant"
+                        style={{ color: theme.palette.primary.main, marginLeft: 5 }}
+                      >
+                        Register For Applicant
                       </NavLink>
                     </Paragraph>
                   </form>
